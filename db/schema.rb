@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_06_12_134043) do
+ActiveRecord::Schema[8.0].define(version: 2026_06_12_192010) do
   create_table "board_games", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.text "description"
     t.integer "min_players"
     t.integer "max_players"
