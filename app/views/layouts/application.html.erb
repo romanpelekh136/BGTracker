@@ -23,6 +23,9 @@
   </head>
 
   <body>
+    <% if flash[:alert] %>
+      <h1 style="color: red;"><%= flash[:alert] %></h1>
+    <% end %>
     <%= yield %>
   </body>
 </html>

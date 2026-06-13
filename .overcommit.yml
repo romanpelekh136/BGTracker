@@ -9,12 +9,6 @@ PreCommit:
     enabled: true
     on_warn: fail
 
-  TrailingWhitespace:
-    enabled: true
-    exclude:
-      - '**/db/schema.rb'
-      - '**/db/structure.sql'
-
 PrePush:
   RSpec:
     enabled: true
