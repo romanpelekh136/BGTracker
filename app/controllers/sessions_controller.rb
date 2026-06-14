@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :redirect_if_logged_in
+  before_action :redirect_if_logged_in, only: [ :new, :create ]
 
   def new
   end
@@ -17,5 +17,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session.delete(:player_id)
+    flash[:notice] = "Logged out successfully"
+    redirect_to root_path, status: :see_other
   end
 end
