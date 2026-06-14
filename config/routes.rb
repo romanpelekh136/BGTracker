@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  # get "match/new"
+  # get "match/index"
+  # get "match/create"
+  # get "match/show"
+  # get "match/destroy"
+
+  resources :matches, only: [ :new, :index, :create, :show, :destroy ]
+
   root "home#index"
 
   get "login", to: "sessions#new"

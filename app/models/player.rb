@@ -7,6 +7,6 @@ class Player < ApplicationRecord
 
   has_secure_password
 
-  validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 15 }
+  validates :username, presence: true, uniqueness: true, length: { minimum: 4, maximum: 25 }
   validates :password, length: { minimum: 8, maximum: 70 }
 end
