@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   def new
     @match = Match.new
+    6.times { @match.match_results.build }
   end
 
   def index

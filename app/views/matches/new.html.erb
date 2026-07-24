@@ -1,8 +1,30 @@
-<h1>Match#new</h1>
+<h2>Record a New Match</h2>
 
 <%= form_with model: @match do |f| %>
-  <div>
-    <%= f.label :title, "Tittle" %>
-    <%= f.text_field :title %>
+  <div style="margin-bottom: 20px;">
+    <%= f.label :board_game_id, "Select Board Game" %>
+    <%= f.collection_select :board_game_id, BoardGame.all, :id, :title, prompt:"Choose a game..." %>
   </div>
+  <div style="margin-bottom: 20px;">
+    <%= f.label :played_at, "Date Played" %>
+    <%= f.date_field :played_at %>
+  </div>
+
+  <h3>Players</h3>
+  
+  <%= f.fields_for :match_results do |result_form| %>
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+      <%= result_form.label :player_id, "Player" %>
+      <%= result_form.collection_select :player_id, Player.all, :id, :username, prompt:"Choose a player..." %>
+
+      <%= result_form.label :score, "Score" %>
+      <%= result_form.number_field :score, style: "width: 80px;" %>
+
+      <%= result_form.label :rank, "Rank" %>
+      <%= result_form.number_field :score, style: "width: 80px;" %>
+    </div>
+  <% end %>
+  
+
+  <%= f.submit "Save", disable_with: 'Saving match...' %>
 <% end %>
