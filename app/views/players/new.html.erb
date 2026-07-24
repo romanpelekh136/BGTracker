@@ -1,0 +1,12 @@
+<h1>Players#new</h1>
+<%= form_with model: @player, url: sign_up_path do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign up" %>
+<% end %>
+
+<p>Already have an account? <%= link_to "Log in", login_path %></p>
