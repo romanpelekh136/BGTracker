@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
     if @player.save
       redirect_to login_path
     else
-      flash.now[:alert] = "Something wrong!"
+      flash.now[:alert] = @player.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end

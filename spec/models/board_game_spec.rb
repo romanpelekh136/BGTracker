@@ -25,7 +25,7 @@ RSpec.describe BoardGame, type: :model do
     context 'with min_players less than 1' do
       it 'creates an invalid board game' do
         game = build(:board_game, min_players: 0)
-        expect(game). to be_invalid
+        expect(game).to be_invalid
         expect(game.errors[:min_players]).to include("must be greater than 0")
       end
     end
