@@ -1,2 +1,8 @@
 <h1>Match#new</h1>
-<p>Find me in app/views/match/new.html.erb</p>
+
+<%= form_with model: @match do |f| %>
+  <div>
+    <%= f.label :title, "Tittle" %>
+    <%= f.text_field :title %>
+  </div>
+<% end %>
