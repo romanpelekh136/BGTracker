@@ -12,6 +12,7 @@ class MatchesController < ApplicationController
   end
 
   def show
+    @match = Match.find(params[:id])
   end
 
   def destroy

@@ -1,2 +1,33 @@
-<h1>Match#show</h1>
-<p>Find me in app/views/match/show.html.erb</p>
+<h1>Match Details</h1>
+
+<p>
+  <strong>Game Name:</strong> <%= @match.board_game.title %>
+</p>
+
+<p>
+  <strong>Date Played:</strong> <%= @match.played_at %>
+</p>
+
+
+<h2>Results</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Score</th>
+      <th>Rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @match.match_results.each do |match_result| %>
+      <tr>
+        <td><%= match_result.player.username %></td>
+        <td><%= match_result.score %></td>
+        <td><%= match_result.rank %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "All Matches", :matches %>
