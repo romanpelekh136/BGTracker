@@ -69,4 +69,4 @@ end
 
 gem "shoulda-matchers", "~> 8.0"
 
-gem "overcommit", "~> 0.71.0", group: :development, require: false
+gem "overcommit", "~> 0.72.0", group: :development, require: false
