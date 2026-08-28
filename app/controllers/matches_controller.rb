@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
   def new
     @match = Match.new
-    6.times { @match.match_results.build }
+    @match.match_results.build
   end
 
   def index
@@ -12,8 +12,9 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params)
 
     if @match.save
-      redirect_to @match
+      redirect_to @match, notice: "Match saved successfully."
     else
+      flash.now[:alert] = @match.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +32,7 @@ class MatchesController < ApplicationController
     params.require(:match).permit(
       :board_game_id,
       :played_at,
-      match_results_attributes: [ :player_id, :score, :rank ]
-    )
+      match_results_attributes: [ :id, :player_id, :score, :rank, :_destroy ]
+      )
   end
 end

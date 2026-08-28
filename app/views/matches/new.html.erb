@@ -1,33 +1,70 @@
 <h2>Record a New Match</h2>
 
-<%= form_with model: @match do |f| %>
-  <div style="margin-bottom: 20px;">
-    <%= f.label :board_game_id, "Select Board Game" %>
-    <%= f.collection_select :board_game_id, BoardGame.all, :id, :title, prompt:"Choose a game..." %>
-  </div>
-  <div style="margin-bottom: 20px;">
-    <%= f.label :played_at, "Date Played" %>
-    <%= f.date_field :played_at %>
-  </div>
-
-  <h3>Players</h3>
-  
-  <%= f.fields_for :match_results do |result_form| %>
-    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-      <%= result_form.label :player_id, "Player" %>
-      <%= result_form.collection_select :player_id, Player.all, :id, :username, prompt:"Choose a player..." %>
-
-      <%= result_form.label :score, "Score" %>
-      <%= result_form.number_field :score, style: "width: 80px;" %>
-
-      <%= result_form.label :rank, "Rank" %>
-      <%= result_form.number_field :rank, style: "width: 80px;" %>
+<div data-controller="nested-form">
+  <%= form_with model: @match do |f| %>
+    <div style="margin-bottom: 20px;">
+      <%= f.label :board_game_id, "Select Board Game", style: "display: block; margin-bottom: 5px;" %>
+      <div style="width: 250px;">
+        <%= f.collection_select :board_game_id, BoardGame.all, :id, :title, { prompt: "Choose a game..." }, { data: { controller: "tom-select" } } %>
+      </div>
     </div>
+    <div style="margin-bottom: 20px;">
+      <%= f.label :played_at, "Date Played" %>
+      <%= f.date_field :played_at %>
+    </div>
+
+    <h3>Players</h3>
+
+    <%= f.fields_for :match_results do |result_form| %>
+      <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 15px;">
+        <div style="width: 250px;">
+          <%= result_form.label :player_id, "Player", style: "display: block; margin-bottom: 5px;" %>
+          <%= result_form.collection_select :player_id, Player.all, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
+        </div>
+
+        <div>
+          <%= result_form.label :score, "Score", style: "display: block; margin-bottom: 5px;" %>
+          <%= result_form.number_field :score, style: "width: 80px;" %>
+        </div>
+
+        <div>
+          <%= result_form.label :rank, "Rank", style: "display: block; margin-bottom: 5px;" %>
+          <%= result_form.number_field :rank, style: "width: 80px;" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div data-nested-form-target="links">
+      <button type="button" data-action="click->nested-form#add">Add Player</button>
+    </div>
+    
+    <template data-nested-form-target="template">
+      <%= f.fields_for :match_results, MatchResult.new, child_index: "NEW_RECORD" do |result_form| %>
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 15px;">
+          
+          <div style="width: 250px;">
+            <%= result_form.label :player_id, "Player", style: "display: block; margin-bottom: 5px;" %>
+            <%= result_form.collection_select :player_id, Player.all, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
+          </div>
+
+          <div>
+            <%= result_form.label :score, "Score", style: "display: block; margin-bottom: 5px;" %>
+            <%= result_form.number_field :score, style: "width: 80px;" %>
+          </div>
+
+          <div>
+            <%= result_form.label :rank, "Rank", style: "display: block; margin-bottom: 5px;" %>
+            <%= result_form.number_field :rank, style: "width: 80px;" %>
+          </div>
+          
+        </div>
+      <% end %>
+    </template>
+    
+    <%= f.submit "Save", disable_with: 'Saving match...' %>
+    
   <% end %>
-
-  <%= f.submit "Save", disable_with: 'Saving match...' %>
   
-<% end %>
+</div>
 
-<%= link_to "Home", :root %>
-
+<%= link_to "Home", root_path %>
