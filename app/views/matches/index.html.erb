@@ -1,7 +1,38 @@
-<h1>Match#index</h1>
-<p>Find me in app/views/match/index.html.erb</p>
+<h1>All Matches</h1>
 
+<div style="margin-bottom: 20px;">
+  <%= link_to "← Back to Home", root_path, style: "color: #000; text-decoration: underline;" %>
+</div>
 
-<% @matches.each do |match| %>
-  <%= match.board_game.title%>
-<% end %>
+<div style="display: flex; flex-direction: column; gap: 15px;">
+  <% @matches.each do |match| %>
+    <div style="border: 1px solid #000; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+      
+      <div>
+        <h3 style="margin: 0 0 5px 0;">
+          <%= link_to match.board_game.title, match_path(match), style: "color: #000;" %>
+        </h3>
+        <p style="margin: 0; font-size: 0.85em; color: #555;">
+          <%= match.played_at&.strftime("%B %d, %Y") %>
+        </p>
+      </div>
+
+      <div style="text-align: right;">
+        <% winners = match.match_results.select { |result| result.rank == 1 } %>
+        <% if winners.any? %>
+          <p style="margin: 0;">
+            <strong>Winner:</strong> <%= winners.map { |w| w.player.username }.join(', ') %>
+          </p>
+        <% end %>
+        
+        <p style="margin: 5px 0 0 0; font-size: 0.85em; color: #555;">
+          <%= match.match_results.size %> Players
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div style="margin-top: 20px; text-align: center;">
+  <%== @pagy.series_nav %>
+</div>

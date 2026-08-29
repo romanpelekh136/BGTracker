@@ -5,7 +5,11 @@ class MatchesController < ApplicationController
   end
 
   def index
-    @matches = Match.order(:played_at)
+    @pagy, @matches = pagy(
+      :offset,
+      Match.includes(:board_game, match_results: :player).order(played_at: :desc),
+      limit: 5
+    )
   end
 
   def create
