@@ -13,7 +13,7 @@
       <div style="margin-bottom: 20px;">
         <%= f.label :board_game_id, "Select Board Game", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
         <div style="max-width: 300px;">
-          <%= f.collection_select :board_game_id, BoardGame.all, :id, :title, { prompt: "Choose a game..." }, { data: { controller: "tom-select" } } %>
+          <%= f.collection_select :board_game_id, @board_games, :id, :title, { prompt: "Choose a game..." }, { data: { controller: "tom-select" } } %>
         </div>
       </div>
 
@@ -28,7 +28,7 @@
         <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px;">
           <div style="flex: 1; min-width: 200px;">
             <%= result_form.label :player_id, "Player", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-            <%= result_form.collection_select :player_id, Player.all, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
+            <%= result_form.collection_select :player_id, @players, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
           </div>
 
           <div>
@@ -53,7 +53,7 @@
             
             <div style="flex: 1; min-width: 200px;">
               <%= result_form.label :player_id, "Player", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
-              <%= result_form.collection_select :player_id, Player.all, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
+              <%= result_form.collection_select :player_id, @players, :id, :username, { include_blank: true }, { data: { controller: "tom-select" } } %>
             </div>
 
             <div>
