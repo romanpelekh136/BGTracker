@@ -1,29 +1,38 @@
-<h1>BoardGames#new</h1>
-<p>Find me in app/views/board_games/new.html.erb</p>
+<div style="margin-bottom: 20px;">
+  <%= link_to "← Back to Home", root_path, style: "color: #000; text-decoration: underline;" %>
+</div>
 
-<%= form_with model: @board_game do |f| %>
-  <div>
-    <%= f.label :title, "Title" %>
-    <%= f.text_field :title %>
-  </div>    
-  
-  <div>
-    <%= f.label :description, "Description" %>
-    <%= f.text_area :description %>
-  </div>
+<div style="border: 1px solid #000; padding: 20px; max-width: 480px;">
+  <h1 style="margin: 0 0 15px 0;">Add Board Game</h1>
 
-  <div>
-    <%= f.label :min_players, "Minimum Players" %>
-    <%= f.number_field :min_players %>
-  </div>
+  <%= form_with model: @board_game, local: true do |form| %>
+    
+    <%= render "shared/error_messages", model: @board_game %>
 
-   <div>
-    <%= f.label :max_players, "Maximum Players" %>
-    <%= f.number_field :max_players %>
-  </div>
-  
-  <div>
-    <%= f.submit "Submit", disable_with: 'Submitting...' %>
-  </div>
-<% end %>
-  
+    <div style="margin-bottom: 15px;">
+      <%= form.label :title, "Game Title", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= form.text_field :title, required: true, style: "width: 100%; padding: 8px; border: 1px solid #000; box-sizing: border-box;" %>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <%= form.label :description, "Description", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+      <%= form.text_area :description, rows: 4, style: "width: 100%; padding: 8px; border: 1px solid #000; box-sizing: border-box; resize: vertical;" %>
+    </div>
+
+    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+      <div style="flex: 1;">
+        <%= form.label :min_players, "Min Players", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+        <%= form.number_field :min_players, min: 1, style: "width: 100%; padding: 8px; border: 1px solid #000; box-sizing: border-box;" %>
+      </div>
+
+      <div style="flex: 1;">
+        <%= form.label :max_players, "Max Players", style: "display: block; font-weight: bold; margin-bottom: 5px;" %>
+        <%= form.number_field :max_players, min: 1, style: "width: 100%; padding: 8px; border: 1px solid #000; box-sizing: border-box;" %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.submit "Create Board Game", style: "padding: 8px 16px; border: 1px solid #000; background: #000; color: #fff; cursor: pointer;" %>
+    </div>
+  <% end %>
+</div>

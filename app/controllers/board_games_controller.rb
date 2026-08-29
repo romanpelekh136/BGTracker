@@ -11,7 +11,6 @@ class BoardGamesController < ApplicationController
       flash[:notice] = "Successfully created"
       redirect_to @board_game
     else
-      flash[:alert] = @board_game.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end

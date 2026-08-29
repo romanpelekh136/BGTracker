@@ -1,10 +1,37 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
+/* application.css */
+
+/* 1. Base dimensions for all inputs */
+.ts-wrapper.single .ts-control,
+input[type="number"],
+input[type="date"] {
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 4px 8px !important;
+  box-sizing: border-box !important;
+  border: 1px solid #767676 !important;
+  border-radius: 2px !important;
+  background: #ffffff !important;
+  box-shadow: none !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+/* 2. Force native inputs to render as standard blocks */
+input[type="number"],
+input[type="date"] {
+  display: block !important;
+  line-height: 22px !important;
+}
+
+/* 3. Allow Tom Select to vertically center its internal text */
+.ts-wrapper.single .ts-control {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 4. Strip phantom spacing from the outer library wrapper */
+.ts-wrapper {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

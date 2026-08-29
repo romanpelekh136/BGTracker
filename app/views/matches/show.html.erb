@@ -1,2 +1,39 @@
-<h1>Match#show</h1>
-<p>Find me in app/views/match/show.html.erb</p>
+<div style="margin-bottom: 20px;">
+  <%= link_to "← Back to Matches", matches_path, style: "color: #000; text-decoration: underline;" %>
+</div>
+
+<div style="border: 1px solid #000; padding: 20px; max-width: 600px; margin-bottom: 20px;">
+  <h1 style="margin: 0 0 10px 0;"><%= @match.board_game.title %></h1>
+  <p style="margin: 0 0 20px 0; color: #555; font-size: 0.9em;">
+    Played on <%= @match.played_at&.strftime("%B %d, %Y") %>
+  </p>
+
+  <table style="width: 100%; border-collapse: collapse; text-align: left;">
+    <thead>
+      <tr style="border-bottom: 2px solid #000;">
+        <th style="padding: 8px 0;">Rank</th>
+        <th style="padding: 8px 0;">Player</th>
+        <th style="padding: 8px 0; text-align: right;">Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @match.match_results.order(rank: :asc).each do |result| %>
+        <tr style="border-bottom: 1px solid #eee;">
+          <td style="padding: 10px 0;">
+            <% if result.rank == 1 %>
+              <strong>👑 1</strong>
+            <% else %>
+              <%= result.rank %>
+            <% end %>
+          </td>
+          <td style="padding: 10px 0;"><%= result.player.username %></td>
+          <td style="padding: 10px 0; text-align: right;"><%= result.score || "-" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <%= link_to "Add Another Match", new_match_path, style: "color: #000; text-decoration: underline;" %>
+</div>
