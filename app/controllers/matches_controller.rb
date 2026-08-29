@@ -18,7 +18,6 @@ class MatchesController < ApplicationController
     if @match.save
       redirect_to @match, notice: "Match saved successfully."
     else
-      flash.now[:alert] = @match.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end

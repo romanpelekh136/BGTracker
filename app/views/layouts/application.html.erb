@@ -23,19 +23,29 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <% if flash[:alert] %>
-      <h1 style="color: red;"><%= flash[:alert] %></h1>
-    <% end %>
+ <body>
+    <div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+      
+      <% if current_player %>
+        <div style="text-align: right; margin-bottom: 20px;">
+          <%= button_to "Log out", logout_path, method: :delete, style: "padding: 5px 10px; cursor: pointer; border: 1px solid #000; background: #fff;" %>
+        </div>
+      <% end %>
 
-    <% if flash[:notice] %>
-      <h1 style="color: green;"><%= flash[:notice] %></h1>
-    <% end %>
-    
-    <% if current_player %>
-      <%= button_to "Log out", logout_path, method: :delete %>
-    <% end %>
-    
-    <%= yield %>
+      <% if flash[:notice] %>
+        <div style="border: 1px solid green; color: green; padding: 10px; margin-bottom: 20px;">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+
+      <% if flash[:alert] %>
+        <div style="border: 1px solid red; color: red; padding: 10px; margin-bottom: 20px;">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      
+      <%= yield %>
+      
+    </div>
   </body>
 </html>
