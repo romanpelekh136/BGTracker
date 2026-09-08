@@ -52,6 +52,8 @@ group :development, :test do
 
   gem "rspec-rails"
 
+  gem "ruby-lsp-rspec", require: false
+
   gem "factory_bot_rails"
   gem "faker"
 end
