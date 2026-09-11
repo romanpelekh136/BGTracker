@@ -33,7 +33,7 @@ RSpec.describe Match, type: :model do
       end
     end
 
-    context "when several players are not uniq" do
+    context "when players are not uniq" do
       let(:player) { create(:player) }
       let(:results) { (1..4).map { |i| build(:match_result, rank: i, player: player, match: nil) } }
 
